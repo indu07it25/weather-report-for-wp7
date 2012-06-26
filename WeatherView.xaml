@@ -1,0 +1,74 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:Weather" 
+    x:Class="Weather.WeatherView"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False" Loaded="PhoneApplicationPage_Loaded" Opacity="1">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Back/back_night.jpg"/>
+        </Grid.Background>
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Margin="10,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300*" />
+                <RowDefinition Height="34*" />
+                <RowDefinition Height="201*" />
+                <RowDefinition Height="207*" />
+                <RowDefinition Height="58*" />
+            </Grid.RowDefinitions>
+            <Image HorizontalAlignment="Stretch" x:Name="imgWeather" Stretch="Uniform" VerticalAlignment="Top" Source="/Images/Weathericon/Day/chance_of_rain.png" Grid.Row="0" />
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="0,0,0,0" Name="txtTodayTemperature" Text="-15℃/13℃" VerticalAlignment="Top" FontSize="25" />
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="济南" Width="100" HorizontalAlignment="Stretch" FontSize="50" FontFamily="Microsoft MHei" Name="txtCityName" />
+                <TextBlock Text="2012-1-3 0:18" HorizontalAlignment="Center" FontSize="25" FontFamily="Microsoft MHei" Name="txtLastUpdateTime" />
+                <TextBlock Text="今日天气实况：气温：-3℃；风向/风力：东南风 1级；湿度：36%；空气质量：中；紫外线强度：弱" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="22" FontFamily="Microsoft MHei" Name="txtTodayInfo" />
+            </StackPanel>
+            <local:ForecastTile Grid.Row="3" HorizontalAlignment="Left" Margin="0,20,0,0" x:Name="forecastTile1" VerticalAlignment="Top" Weathericon="/Images/forecasts/01.png" Height="170" Width="110" Temperature="-15/13" />
+            <local:ForecastTile Grid.Row="3" HorizontalAlignment="Left" Margin="114,20,0,0" x:Name="forecastTile2" VerticalAlignment="Top" WhichDay="明天" Weathericon="/Images/forecasts/02.png" Height="169" Width="110" />
+            <local:ForecastTile Grid.Row="3" HorizontalAlignment="Left" Margin="228,20,0,0" x:Name="forecastTile3" VerticalAlignment="Top" WhichDay="后天" Weathericon="/Images/forecasts/03.png" Height="170" Width="110" />
+            <local:ForecastTile Grid.Row="3" Margin="0,20,6,0" VerticalAlignment="Top" Height="170" HorizontalAlignment="Right" Width="110" x:Name="forecastTile4" />
+        </Grid>
+        
+    </Grid>
+ 
+    <!--演示 ApplicationBar 用法的示例代码-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.8">
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.favs.addto.rest.png" Text="锁定城市" Click="ApplicationBarIconButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

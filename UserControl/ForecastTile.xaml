@@ -1,0 +1,22 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Weather.ForecastTile"
+	d:DesignWidth="120" d:DesignHeight="170">
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="46*"/>
+			<RowDefinition Height="100*"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+		<Grid.Background>
+			<ImageBrush Stretch="Fill" ImageSource="/Weather;component/UserControl/forecast_tile.png"/>
+		</Grid.Background>
+        <TextBlock Name="txtWhichDay" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="今天" Foreground="White" FontFamily="Segoe WP Bold" FontSize="32" Grid.Row="0" />
+        <Image Name="imgWeathericon" Margin="0,0,0,0" Source="/Images/forecasts/day/sunny.png" Grid.Row="1" Stretch="Uniform"/>
+        <TextBlock x:Name="txtTemperature" Grid.Row="2" Foreground="White" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial" Text="-13°/-15°" />
+    </Grid>
+</UserControl>

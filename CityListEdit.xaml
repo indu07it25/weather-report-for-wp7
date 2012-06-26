@@ -1,0 +1,71 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    x:Class="Weather.CityListEdit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True" toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="cityList">
+            <StackPanel Orientation="Horizontal" Width="400">
+                <TextBlock FontSize="50" Text="{Binding CityName}"/>
+                <HyperlinkButton Name="linkButtonDel" Content="删除" Tag="{Binding CityGuid}" Style="{StaticResource HyperlinkEmptyStyle}" TargetName="{Binding CityName}" Click="linkButtonDel_Click"/>
+            </StackPanel>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="AddCityShowDialog" Grid.Row="0">
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="0,10,0,0" Name="CityNameTextBox" Text="" VerticalAlignment="Top" Width="214" />
+            <Button Content="添加" Height="72" HorizontalAlignment="Left" Margin="220,10,0,0" Name="AddCityButton" VerticalAlignment="Top" Width="134" Click="AddCityButton_Click" />
+            <Button Content="取消" Height="72" HorizontalAlignment="Left" Margin="348,10,0,0" Name="CancelCityButton" VerticalAlignment="Top" Width="132" Click="CancelCityButton_Click" />
+        </Grid>
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <ListBox Name="listBoxCityList" Margin="10,10,10,10" ItemTemplate="{StaticResource cityList}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            </ListBox>
+        </Grid>
+    </Grid>
+    
+    <!--演示 ApplicationBar 用法的示例代码-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="appbarbtnAdd" IconUri="/icons/appbar.add.rest.png" Text="添加" Click="appbarbtnAdd_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
